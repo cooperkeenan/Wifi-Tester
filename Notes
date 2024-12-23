@@ -1,0 +1,7 @@
+WEATHER API KEY: 7aa8416bc5a5270146aaa3a23034ec27
+
+Lattitude: 57.494733
+
+Longitude: 2.256437
+
+https://api.openweathermap.org/data/2.5/weather?lat={57.494733}&lon={2.256437}&appid={7aa8416bc5a5270146aaa3a23034ec27}
