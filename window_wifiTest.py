@@ -5,10 +5,12 @@ import requests
 import csv
 from datetime import datetime
 
-# Returns download speed in mbps
+# Returns download speed in mbps using the "best" server
 def test_download_speed():
     s = Speedtest()
-    return s.download() / 1_000_000  # bits -> Mbps
+    best_server = s.get_best_server()  # This picks the server with the lowest ping
+    speed_bps = s.download()  # download speed in bits per second
+    return speed_bps / 1_000_000  # convert bits -> megabits
 
 # Get current Weather Data
 def get_weather_data(lat, lon, api_key):
@@ -39,7 +41,6 @@ def get_wifi_info():
     wifi_channel = None
     wifi_signal_percent = None
 
-    # Run the command in a subprocess
     cmd = ["netsh", "wlan", "show", "interfaces"]
     result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
     
@@ -114,7 +115,7 @@ if __name__ == "__main__":
 
     while True:
         try:
-            # 1. Measure Wi-Fi speed
+            # 1. Measure Wi-Fi speed (forcing best server)
             speed_mbps = test_download_speed()
 
             # 2. Get Wi-Fi channel & signal strength (percentage)
@@ -146,3 +147,5 @@ if __name__ == "__main__":
 
         # Wait ~6.7 minutes (400 seconds) before the next iteration
         time.sleep(400)
+
+
