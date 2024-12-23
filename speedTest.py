@@ -73,5 +73,5 @@ if __name__ == "__main__":
             print("Error:", e)
         
         # Wait 60 seconds before the next iteration
-        time.sleep(60)
+        time.sleep(500)
 
